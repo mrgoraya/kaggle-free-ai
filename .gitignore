@@ -1,0 +1,13 @@
+# Real config with your live tunnel URL - never commit
+opencode.json
+
+# Secrets / keys
+.env
+*.key
+
+# Logs created by the Kaggle script
+ollama.log
+tunnel.log
+
+# macOS
+.DS_Store

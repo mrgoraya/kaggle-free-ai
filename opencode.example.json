@@ -1,0 +1,18 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "kaggle": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Kaggle Qwen",
+      "options": {
+        "baseURL": "https://YOUR-URL.trycloudflare.com/v1"
+      },
+      "models": {
+        "qwen3.5:35b-a3b": {
+          "name": "Qwen3.5 35B (Kaggle)",
+          "limit": { "context": 131072, "output": 8192 }
+        }
+      }
+    }
+  }
+}

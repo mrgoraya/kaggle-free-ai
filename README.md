@@ -1,49 +1,39 @@
-# Kaggle Free AI — Qwen3.5 + OpenCode + Claude Code
+# Kaggle Free AI — Qwen3.5 + OpenCode
 
-Kaggle ke **free GPU** par Qwen3.5 (35B) chalao aur apne laptop ke **OpenCode** ya **Claude Code** (9router ke zariye) se use karo. Coding + ffmpeg video editing, bilkul free.
+Run Qwen3.5 (35B) on Kaggle's **free GPU** and use it from **OpenCode** on your laptop. Coding and ffmpeg video editing, completely free.
 
-## Zaroorat
+## Requirements
 
-- Kaggle account (phone verified)
-- Laptop par Node.js aur ffmpeg
+- A Kaggle account (phone verified)
+- Node.js and ffmpeg on your laptop
 - OpenCode: `npm install -g opencode-ai`
-- (Optional) 9router + Claude Code: `npm install -g 9router @anthropic-ai/claude-code`
 
-## Step 1: Kaggle par model chalao
+## Step 1: Run the model on Kaggle
 
-1. Kaggle par naya notebook banao.
-2. Settings mein **Accelerator: GPU T4 x2** aur **Internet: On** karo.
-3. [`kaggle_qwen_cell.py`](kaggle_qwen_cell.py) ka poora code **ek hi cell** mein paste karo aur Run dabao.
-4. 5–10 minute baad output mein aap ka URL aayega, jaise:
+1. Create a new notebook on Kaggle.
+2. In Settings, set **Accelerator: GPU T4 x2** and **Internet: On**.
+3. Paste the entire contents of [`kaggle_qwen_cell.py`](kaggle_qwen_cell.py) into **a single cell** and click Run.
+4. After 5–10 minutes, the output shows your URL, for example:
    `https://xxxx.trycloudflare.com/v1`
 
-Settings (script ke top par):
+Settings (at the top of the script):
 
-| Setting | Default | Kab change karein |
+| Setting | Default | When to change it |
 |---|---|---|
-| `MODEL` | `qwen3.5:35b-a3b` | Out of memory ho to `qwen3.5:9b` |
-| `CONTEXT` | `131072` (128K) | `ollama ps` mein CPU dikhe to `65536` |
+| `MODEL` | `qwen3.5:35b-a3b` | Use `qwen3.5:9b` if you run out of memory |
+| `CONTEXT` | `131072` (128K) | Use `65536` if `ollama ps` shows any CPU usage |
 
-## Step 2: OpenCode connect karo
+## Step 2: Connect OpenCode
 
-1. [`opencode.example.json`](opencode.example.json) ko copy karo yahan:
+1. Copy [`opencode.example.json`](opencode.example.json) to:
    - Mac/Linux: `~/.config/opencode/opencode.json`
    - Windows: `C:\Users\<name>\.config\opencode\opencode.json`
-2. `baseURL` mein apna Kaggle URL daalo (end mein `/v1` zaroor ho).
-3. `opencode` chalao → `/models` → **Qwen3.5 35B (Kaggle)** select karo.
+2. Put your Kaggle URL in `baseURL` (it must end with `/v1`).
+3. Run `opencode`, type `/models`, and select **Qwen3.5 35B (Kaggle)**.
 
-## Step 3 (optional): Claude Code via 9router
+## Important notes
 
-1. `9router` chalao → dashboard `http://localhost:20128`.
-2. **Providers → Add Anthropic Compatible** → name `kaggle`, Base URL = aap ka Kaggle tunnel URL.
-3. **Add API Key** → kuch bhi likho (jaise `ollama`).
-4. Available Models mein `qwen3.5:35b-a3b` add karo → test karo (green tick).
-5. **CLI Tools → Claude Code** → slots mein `kg-prod/qwen3.5:35b-a3b` (ya jo naam 9router dikhaye) select karo → **Apply**.
-6. Terminal mein `claude` chalao.
-
-## Zaroori baatein
-
-- Kaggle har hafte ~30 ghante free GPU deta hai; session ~12 ghante baad band ho jaata hai.
-- Har naye session mein **naya URL** milta hai — OpenCode aur 9router dono mein update karo.
-- Tunnel URL kisi ke saath share mat karo; us par password nahi hota.
-- Kaam khatam ho to cell **Stop** karo aur session band karo.
+- Kaggle gives about 30 hours of free GPU per week; each session stops after about 12 hours.
+- Every new session gives you a **new URL**, so update it in `opencode.json`.
+- Don't share your tunnel URL; it has no password.
+- When you're done, stop the cell and stop the Kaggle session.
